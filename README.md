@@ -6,7 +6,7 @@
 - [😊Live Demo](https://huggingface.co/spaces/orby-osu/UGround) (Try it out yourself!)
 - [Main Code Repo](https://github.com/OSU-NLP-Group/UGround)
 
-Note: This is codebase to inference and train [UGround-v1](https://github.com/OSU-NLP-Group/UGround). It is modified from [haotian-liu/LLaVA](https://github.com/haotian-liu/LLaVA), with changes mainly on image processing. We may use other codebases or architectures for later versions.
+Note: This is the codebase to inference and train [UGround-v1](https://github.com/OSU-NLP-Group/UGround). It is modified from [haotian-liu/LLaVA](https://github.com/haotian-liu/LLaVA), with changes mainly on image processing. We may use other codebases or architectures for later versions.
 
 ## Install
 
