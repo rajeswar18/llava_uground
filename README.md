@@ -40,3 +40,16 @@ pip install -e .
 pip install to_be_uploaded
 ```
 
+
+
+
+## Inference
+
+
+
+```bash
+python single_infer.py # single request
+
+python batch_infer.py # for inference of a jsonl
+```
+
