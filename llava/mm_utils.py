@@ -328,51 +328,49 @@ def process_anyres_ui_image(image, processor,fusion=False):
 
 
 
-def resize_for_large_image(image):
-    """
-    Process an image with variable resolutions.
+def pre_resize_by_width(image,default_width=(1344,672)):
 
-    Args:
-        image (PIL.Image.Image): The input image to be processed.
-        processor: The image processor object.
-        grid_pinpoints (str): A string representation of a list of possible resolutions.
-
-    Returns:
-        torch.Tensor: A tensor containing the processed image patches.
-    """
+    # Highly recommend to use 1344 or 672 as the width.
 
     original_width, original_height = image.size
 
     if original_width >= original_height:
         # Resize based on width being 1344
 
-        if original_width>1344:
-            new_width = 1344
-            resize_scale = new_width / original_width
-            new_height = round(original_height * resize_scale)
-        else:
-            new_size=get_resized_ui_resolution((original_width, original_height))
-            new_width=new_size[0]
-            resize_scale = new_width / original_width
-            new_height = round(original_height * resize_scale)
-
-    else:
-        if original_width > 896:
-        # Resize based on width being 896
-            new_width = 896
-            resize_scale = new_width / original_width
-            new_height = round(original_height * resize_scale)
-        else:
-            new_size = get_resized_ui_resolution((original_width, original_height))
-            new_width = new_size[0]
-            resize_scale = new_width / original_width
-            new_height = round(original_height * resize_scale)
-
-
-    if new_height > 2016:
-        new_width = 672
+        new_width = default_width[0]
         resize_scale = new_width / original_width
         new_height = round(original_height * resize_scale)
+
+        # if original_width>1344:
+        #     new_width = default_width[0]
+        #     resize_scale = new_width / original_width
+        #     new_height = round(original_height * resize_scale)
+        # else:
+        #     new_size=get_resized_ui_resolution((original_width, original_height))
+        #     new_width=new_size[0]
+        #     resize_scale = new_width / original_width
+        #     new_height = round(original_height * resize_scale)
+
+    else:
+
+        new_width = default_width[1]
+        resize_scale = new_width / original_width
+        new_height = round(original_height * resize_scale)
+        # if original_width > 896:
+        # # Resize based on width being 896
+        #     new_width = 896
+        #     resize_scale = new_width / original_width
+        #     new_height = round(original_height * resize_scale)
+        # else:
+        #     new_size = get_resized_ui_resolution((original_width, original_height))
+        #     new_width = new_size[0]
+        #     resize_scale = new_width / original_width
+        #     new_height = round(original_height * resize_scale)
+
+    # if new_height > 2016:
+    #     new_width = 672
+    #     resize_scale = new_width / original_width
+    #     new_height = round(original_height * resize_scale)
     resized_image = image.resize((new_width, new_height))
     return resized_image,resize_scale
 

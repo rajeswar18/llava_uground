@@ -9,7 +9,7 @@ from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_S
 from llava.conversation import conv_templates, SeparatorStyle
 from llava.model.builder import load_pretrained_model
 from llava.utils import disable_torch_init
-from llava.mm_utils import tokenizer_image_token, process_images, get_model_name_from_path,resize_for_large_image
+from llava.mm_utils import tokenizer_image_token, process_images, get_model_name_from_path,pre_resize_by_width
 
 from PIL import Image
 import math
@@ -62,7 +62,7 @@ def eval_model(args):
 
         image = Image.open(os.path.join(args.image_folder, image_file)).convert('RGB')
 
-        image,pre_resize_scale=resize_for_large_image(image)
+        image,pre_resize_scale=pre_resize_by_width(image)
 
 
         original_imae_size=image.size

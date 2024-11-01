@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw
 
 from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN
 from llava.conversation import conv_templates
-from llava.mm_utils import tokenizer_image_token, process_images, resize_for_large_image
+from llava.mm_utils import tokenizer_image_token, process_images, pre_resize_by_width
 from llava.model.builder import load_pretrained_model
 from llava.utils import disable_torch_init
 
@@ -50,7 +50,7 @@ input_ids = tokenizer_image_token(prompt, tokenizer, IMAGE_TOKEN_INDEX, return_t
 
 image = Image.open(os.path.join(image_path)).convert('RGB')
 
-resized_image, pre_resize_scale = resize_for_large_image(image)
+resized_image, pre_resize_scale = pre_resize_by_width(image)
 # print("resized_scale: ",pre_resize_scale)
 
 image_tensor, image_new_size = process_images([resized_image], image_processor, model.config)
